@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Social Media Dashboard</title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    /* -------VARIABLES----------*/
+
+    :root {
+      --primary-green: hsl(163, 72%, 41%);
+      --primary-red: hsl(356, 69%, 56%);
+      --fb-color: hsl(208, 92%, 53%);
+      --tw-color: hsl(203, 89%, 53%);
+      --insta-color: linear-gradient(to right, hsl(37, 97%, 70%), hsl(329, 70%, 58%));
+      --yt-color: hsl(348, 97%, 39%);
+
+      /*light-theme*/
+      --container-bg: hsl(225, 100%, 98%);
+      --body-bg: hsl(0, 0%, 100%);
+      --card-bg: hsl(227, 47%, 96%);
+      --text-color: hsl(228, 12%, 44%);
+      --text-color2: hsl(230, 17%, 14%);
+    }
+
+    * {
+      font-family: 'Inter', sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+
+
+    .attribution {
+      font-size: 14px;
+      text-align: center;
+      padding: 1rem;
+      color: var(--text-color);
+    }
+
+    body {
+      box-sizing: border-box;
+      background: var(--body-bg);
+    }
+
+    .container {
+      display: block;
+      background-color: var(--container-bg);
+      width: 80vw;
+      margin: 0.5rem auto;
+    }
+
+    /*  head part */
+    .head {
+      width: 100%;
+      padding: 0.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    hr {
+      display: none;
+    }
+
+    .head h1 {
+      color: var(--text-color2);
+    }
+
+    .head h1 p {
+      font-size: 1rem;
+      color: var(--text-color);
+    }
+
+    #theme-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      background-color: var(--text-color2);
+      color: var(--body-bg);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /*    highlight area  */
+
+    .highlight-data {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+
+    .highlight-data .item:nth-child(1) {
+      border-top: 3px solid var(--fb-color);
+    }
+
+    .highlight-data .item:nth-child(2) {
+      border-top: 3px solid var(--tw-color);
+    }
+
+    .highlight-data .item:nth-child(3) {
+      border-top: 3px solid;
+      border-image-slice: 1;
+      border-width: 3px;
+      border-image-source: var(--insta-color);
+    }
+
+    .highlight-data .item:nth-child(4) {
+      border-top: 3px solid var(--yt-color);
+    }
+
+    .highlight-data .item {
+      display: flex;
+      flex-direction: column;
+      width: 20%;
+      align-items: center;
+      background-color: var(--card-bg);
+    }
+
+    .highlight-data .item .icon {
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-color);
+    }
+
+    .highlight-data .item h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--text-color2);
+    }
+
+    .highlight-data .item .followers-text {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      color: var(--text-color);
+    }
+
+    .highlight-data .item .inc {
+      margin-bottom: 1rem;
+      color: var(--primary-green);
+      cursor: pointer;
+    }
+
+    .highlight-data .item .dec {
+      margin-bottom: 1rem;
+      color: var(--primary-red);
+      cursor: pointer;
+    }
+
+    /*   overview    */
+    #overview-heading {
+      color: var(--text-color);
+      font-size: 1.5rem;
+      padding: 1rem 0;
+      margin: 1rem 0;
+      font-weight: 700
+    }
+
+    .overview-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .overview-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 15%;
+      padding: 1rem 2rem;
+      margin-bottom: 1rem;
+      background: var(--card-bg);
+    }
+
+    .left {
+      float: left;
+    }
+
+    .right {
+      float: right;
+    }
+
+    .overview-item .heading {
+      font-size: 1rem;
+      color: var(--text-color2);
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .overview-item .number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-color2);
+    }
+
+    .overview-item .inc,
+    .dec {
+      padding-top: 0.8rem;
+    }
+
+    .overview-item .inc {
+      color: var(--primary-green);
+    }
+
+    .overview-item .dec {
+      color: var(--primary-red);
+    }
+
+    @media screen and (max-width:375px) {
+      .container {
+        width: 90vw;
+        margin: 0.5rem auto;
+      }
+
+      /*  head part */
+      .head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .head h1 {
+        font-size: 1.5rem;
+      }
+
+      hr {
+        display: block;
+        margin: 1rem auto;
+      }
+
+      /*    highlight area  */
+
+      .highlight-data {
+        flex-direction: column;
+
+      }
+
+      .highlight-data .item {
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
+      /*   overview    */
+      #overview-heading {
+        margin: 0.5rem 0;
+
+      }
+
+      .overview-container {
+        flex-direction: column;
+        width: 90vw;
+      }
+
+      .overview-item {
+        flex-direction: column;
+        width: 90%;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+
+    <div class="head">
+      <h1>Social Media Dashboard <br>
+        <p>Total Followers: 23,004</p>
+        <hr>
+      </h1>
+
+      <button type="button" id="theme-btn">Dark Mode</button>
+    </div>
+
+    <div class="highlight-data">
+      <div class="item">
+        <h3 class="icon">
+          <img src="./images/icon-facebook.svg" alt="icon-facebook">
+          <span> &nbsp;@nathanf</span>
+        </h3>
+        <h1>1987</h1>
+        <p class="followers-text">f o l l o w e r s</p>
+        <p class="inc"><img src="./images/icon-up.svg" alt="icon-up"> 12 Today</p>
+      </div>
+      <div class="item">
+        <h3 class="icon">
+          <img src="./images/icon-twitter.svg" alt="icon-twitter">
+          <span> &nbsp;@nathanf</span>
+        </h3>
+        <h1>1044</h1>
+        <p class="followers-text">f o l l o w e r s</p>
+        <p class="inc"><img src="./images/icon-up.svg" alt="icon-up"> 99 Today</p>
+      </div>
+      <div class="item">
+        <h3 class="icon">
+          <img src="./images/icon-instagram.svg" alt="icon-instagram">
+          <span> &nbsp;@nathanf</span>
+        </h3>
+        <h1>11k</h1>
+        <p class="followers-text">f o l l o w e r s</p>
+        <p class="inc"><img src="./images/icon-up.svg" alt="icon-up"> 1099 Today</p>
+      </div>
+      <div class="item">
+        <h3 class="icon">
+          <img src="./images/icon-youtube.svg" alt="icon-youtube">
+          <span> &nbsp;@nathanf</span>
+        </h3>
+        <h1>8239</h1>
+        <p class="followers-text">S u b s c r i b e r s</p>
+        <p class="dec"><img src="./images/icon-down.svg" alt="icon-down"> 144 Today</p>
+      </div>
+    </div>
+
+    <h2 id="overview-heading">Overview - Today</h2>
+
+    <div class="overview-container">
+
+      <div class="overview-item">
+        <p>
+          <span class="left heading">Page views</span> <span class="right"><img src="./images/icon-facebook.svg"
+              alt="icon-facebook"></span>
+
+        </p>
+        <p>
+          <span class="left number">87</span>
+          <span class="right inc"><img src="./images/icon-up.svg" alt="icon-up">&nbsp;3%</span>
+        </p>
+      </div>
+
+
+
+
+      <div class="overview-item">
+        <p>
+          <span class="left heading">Likes</span> <span class="right"><img src="./images/icon-facebook.svg"
+              alt="icon-facebook"></span>
+
+        </p>
+        <p>
+          <span class="left number">52</span>
+          <span class="right dec"><img src="./images/icon-down.svg" alt="icon-down">&nbsp;2%</span>
+        </p>
+      </div>
+
+
+      <div class="overview-item">
+        <p>
+          <span class="left heading">Likes</span> <span class="right"><img src="./images/icon-instagram.svg"
+              alt="icon-instagram"></span>
+
+        </p>
+        <p>
+          <span class="left number">5462</span>
+          <span class="right inc"><img src="./images/icon-up.svg" alt="icon-up">&nbsp;2257%</span>
+        </p>
+      </div>
+
+
+
+      <div class="overview-item">
+        <p>
+          <span class="left heading">Profile views</span> <span class="right"><img src="./images/icon-instagram.svg"
+              alt="icon-instagram"></span>
+
+        </p>
+        <p>
+          <span class="left number">52k</span>
+          <span class="right inc"><img src="./images/icon-up.svg" alt="icon-up">&nbsp;1375%</span>
+        </p>
+      </div>
+
+
+
+      <div class="overview-item">
+        <p>
+          <span class="left heading">Retweets</span> <span class="right"><img src="./images/icon-twitter.svg"
+              alt="icon-twitter"></span>
+
+        </p>
+        <p>
+          <span class="left number">117</span>
+          <span class="right inc"><img src="./images/icon-up.svg" alt="icon-up">&nbsp;303%</span>
+        </p>
+      </div>
+
+
+
+      <div class="overview-item">
+        <p>
+          <span class="left heading">Likes</span> <span class="right"><img src="./images/icon-twitter.svg"
+              alt="icon-twitter"></span>
+
+        </p>
+        <p>
+          <span class="left number">507</span>
+          <span class="right inc"><img src="./images/icon-up.svg" alt="icon-up">&nbsp;553%</span>
+        </p>
+      </div>
+
+
+
+      <div class="overview-item">
+        <p>
+          <span class="left heading">Likes</span> <span class="right"><img src="./images/icon-youtube.svg"
+              alt="icon-youtube"></span>
+
+        </p>
+        <p>
+          <span class="left number">107</span>
+          <span class="right dec"><img src="./images/icon-down.svg" alt="icon-down">&nbsp;19%</span>
+        </p>
+      </div>
+
+
+
+      <div class="overview-item">
+        <p>
+          <span class="left heading">Total views</span> <span class="right"><img src="./images/icon-youtube.svg"
+              alt="icon-youtube"></span>
+
+        </p>
+        <p>
+          <span class="left number">1407</span>
+          <span class="right dec"><img src="./images/icon-down.svg" alt="icon-down">&nbsp;12%</span>
+        </p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="attribution">
+    Coded by <a href="#">Jabra Ram</a>.
+  </footer>
+
+
+  <script>
+    const theme_btn = document.getElementById('theme-btn');
+    const r = document.querySelector(':root');
+    theme_btn.addEventListener('click', function (event) {
+      event.preventDefault();
+      theme_btn.classList.toggle('active');
+      if (theme_btn.classList.contains('active')) {
+        r.style.setProperty('--body-bg', 'hsl(230, 17%, 14%)');
+        r.style.setProperty('--container-bg', ' hsl(230, 17%, 14%)');
+        r.style.setProperty('--card-bg', ' hsl(228, 28%, 20%)');
+        r.style.setProperty('--text-color', 'hsl(228, 34%, 66%)');
+        r.style.setProperty('--text-color2', 'hsl(0, 0%, 100%)');
+        theme_btn.innerHTML = "Light Mode";
+      }
+      else {
+        r.style.setProperty('--body-bg', 'hsl(0, 0%, 100%)');
+        r.style.setProperty('--container-bg', 'hsl(225, 100%, 98%) ');
+        r.style.setProperty('--card-bg', ' hsl(227, 47%, 96%)');
+        r.style.setProperty('--text-color', ' hsl(228, 12%, 44%)');
+        r.style.setProperty('--text-color2', ' hsl(230, 17%, 14%)');
+        theme_btn.innerHTML = "Dark Mode";
+      }
+    })
+
+
+  </script>
+</body>
+
+</html>
